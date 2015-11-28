@@ -12,8 +12,8 @@ import java.io.IOException;
 public class Main extends JPanel {
 	private static final long serialVersionUID = 1L;
 	static EclipseTime ec = new EclipseTime();
-	static int ss_center_x = 300;
-	static int ss_center_y = 300;
+	static int ss_center_x = 200;
+	static int ss_center_y = 200;
 
 	public Main() {
 	}
@@ -25,12 +25,14 @@ public class Main extends JPanel {
 		for (int kredsløbTæller = 0; kredsløbTæller < SolSystem.size(); kredsløbTæller++) {
 			SolSystem.get(kredsløbTæller).tegn(g2d);
 			SolSystem.get(kredsløbTæller).beregnPlanetensGradIKredsløbet(ec.getSSClick());
+			SolSystem.get(kredsløbTæller).getPlanetX(SolSystem.get(kredsløbTæller).getPlanetensGradIKredsløbet());
+			SolSystem.get(kredsløbTæller).getPlanetY(SolSystem.get(kredsløbTæller).getPlanetensGradIKredsløbet());
 			SolSystem.get(kredsløbTæller).tegnPlanet((Graphics2D) g, ec);
 
 		}
-		Analyse.get(0).tegn(g2d);
-		Analyse.get(0).planet.setDistancePrClick(lavesteGradIndtilNu);
-		Analyse.get(0).tegnPlanet((Graphics2D) g, ec);
+		//Analyse.get(0).tegn(g2d);
+		//Analyse.get(0).planet.setDistancePrClick(lavesteGradIndtilNu);
+		//Analyse.get(0).tegnPlanet((Graphics2D) g, ec);
 
 	}
 
@@ -43,10 +45,10 @@ public class Main extends JPanel {
 
 	public static void initWorld() {
 
-		Kredsløb kredsløbMars = new Kredsløb(400, ss_center_x, ss_center_y, "D", 300, 000, 000, 255);
-		Kredsløb kredsløbJorden = new Kredsløb(300, ss_center_x, ss_center_y, "C", 150, 000, 255, 000);
-		Kredsløb kredsløbVenus = new Kredsløb(200, ss_center_x, ss_center_y, "B", 50, 255, 000, 000);
-		Kredsløb kredsløbMerkur = new Kredsløb(100, ss_center_x, ss_center_y, "A", 25, 000, 000, 000);
+		Kredsløb kredsløbMars = new Kredsløb(600, ss_center_x, ss_center_y, "D", 0, 000, 000, 255);
+		Kredsløb kredsløbJorden = new Kredsløb(400, ss_center_x, ss_center_y, "C", 0, 000, 255, 000);
+		Kredsløb kredsløbVenus = new Kredsløb(300, ss_center_x, ss_center_y, "B", 0, 255, 000, 000);
+		Kredsløb kredsløbMerkur = new Kredsløb(200, ss_center_x, ss_center_y, "A", 0, 000, 000, 000);
 		Kredsløb kredsløbMinGrad = new Kredsløb(200, 100, 100, "X", 100, 000, 000, 000);
 
 		kredsløbMars.planet.setDistancePrClick(1);
@@ -56,10 +58,10 @@ public class Main extends JPanel {
 		kredsløbMinGrad.planet.setDistancePrClick(0);
 
 		SolSystem.add(kredsløbMars);
-		SolSystem.add(kredsløbJorden);
-		SolSystem.add(kredsløbVenus);
-		SolSystem.add(kredsløbMerkur);
-		// ****************************************
+//		SolSystem.add(kredsløbJorden);
+//		SolSystem.add(kredsløbVenus);
+//		SolSystem.add(kredsløbMerkur);
+//		// ****************************************
 		Analyse.add(kredsløbMinGrad);
 		// *****************************************
 
@@ -131,18 +133,18 @@ public class Main extends JPanel {
 		JFrame frame = new JFrame("MultiEclipse");
 		Main universe = new Main();
 		frame.add(universe);
-		frame.setSize(500, 500);
+		frame.setSize(700, 800);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 while (true) {
 			
 			getHvorTaetErPlaneternePaaHinanden();
-			//pauseProg();
+			pauseProg();
 			
 			universe.repaint();
 
-			Thread.sleep(100);
+			//Thread.sleep(400);
 			
 			ec.click();
 

@@ -8,8 +8,10 @@ public class Kredsløb {
 	private int omkreds;
 	private int center_x;
 	private int center_y;
-	private int zoom_factor = 5;
+	private int zoom_factor = 1;
     private int planetensGradIKredsløbet = 0;
+	private double planet_x;
+	private double planet_y;
     
 	private String navn;
 
@@ -83,8 +85,37 @@ public class Kredsløb {
 		g.setColor(this.planet.getColor());
 		g.fillArc(x, y, r, r, (int) this.getPlanetensGradIKredsløbet() * -1, (int) this.planet.getDistancePrClick());
 		//g.drawArc(x, y, r, r, (int) this.planetensPostionIKredsløbet(ec) * -1, (int) this.planet.getDistancePrClick());
-
+		this.getPlanetX(this.getPlanetensGradIKredsløbet());
+		this.getPlanetY(this.getPlanetensGradIKredsløbet());
+		g.fillOval(
+			  (int)this.getPlanetX(this.getPlanetensGradIKredsløbet())
+			, (int)this.getPlanetY(this.getPlanetensGradIKredsløbet())
+			, 10
+			, 10);
+		LogPlanetXY();
 	}
+	
+	public double getPlanetX(int vinkel){
+		double radianer = (vinkel * Math.PI ) / 180;
+		double enhedsCirkelX = Math.cos(radianer);
+		
+		planet_x  = (enhedsCirkelX*getRadius());
+		planet_x += center_x;
+		return planet_x;
+	}
+	public double getPlanetY(int vinkel){		
+		double radianer = (vinkel * Math.PI ) / 180;
+		double enhedsCirkelY = Math.sin(radianer);
+		
+		planet_y = (enhedsCirkelY*getRadius());
+		planet_y += center_y;
+		return planet_y;
+	}
+	
+	public void LogPlanetXY(){
+		System.out.println(this.planet.getName() + "(X,Y) : " + planet_x + "," + planet_y + " Vinkel : " + planetensGradIKredsløbet);
+	}
+	
 	
 
 }

@@ -9,6 +9,7 @@ public class Planet {
 	private int planetensStartAfstandKredsløbet;	
 	private String name;
 	private Color color;
+	
 
 	// Konstruktor
 	public Planet(String n, int startAfstand, int r, int g, int b) {
@@ -51,5 +52,6 @@ public class Planet {
 	public void setPlanetensStartAfstandKredsløbet(int planetensStartAfstandKredsløbet) {
 		this.planetensStartAfstandKredsløbet = planetensStartAfstandKredsløbet;
 	}
+	
 
 }
